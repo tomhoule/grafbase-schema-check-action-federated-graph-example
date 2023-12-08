@@ -1,0 +1,36 @@
+name: Schema Checks
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  schema-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: |
+          docker-compose up -d
+
+          pushd retail
+          npm i
+          npx -y grafbase introspect --dev > ../retail.graphql
+          popd
+
+          pushd manufacturing
+          npm i
+          npx -y grafbase introspect --dev > ../manufacturing.graphql
+          popd
+
+      - uses: grafbase/schema-check-action@main
+        with:
+          grafbase_access_token: ${{ secrets.GRAFBASE_ACCESS_TOKEN }}
+          project_ref: tomhoule/schema-check-action-federated-graph-example@main
+          schema_path: ./retail.graphql
+
+      - uses: grafbase/schema-check-action@main
+        with:
+          grafbase_access_token: ${{ secrets.GRAFBASE_ACCESS_TOKEN }}
+          project_ref: tomhoule/schema-check-action-federated-graph-example@main
+          schema_path: ./manufacturing.graphql
