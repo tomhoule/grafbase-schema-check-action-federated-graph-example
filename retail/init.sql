@@ -1,4 +1,4 @@
-CREATE TABLE miso (
+CREATE TABLE miso2 (
     product_id SERIAL PRIMARY KEY,
     name VARCHAR(50),
     origin VARCHAR(50),
@@ -15,14 +15,14 @@ CREATE TABLE supplier (
 
 CREATE TABLE purchase (
     purchase_id SERIAL PRIMARY KEY,
-    product_id INT REFERENCES miso(product_id),
+    product_id INT REFERENCES miso2(product_id),
     customer_id INT,
     quantity INT,
     purchase_date DATE
 );
 
 -- Insert sample data into `miso`
-INSERT INTO miso (name, origin, price, stock_quantity)
+INSERT INTO miso2 (name, origin, price, stock_quantity)
 VALUES ('Shiro Miso', 'Japan', 12.99, 50),
        ('Aka Miso', 'Japan', 15.49, 40);
 
