@@ -23,14 +23,14 @@ jobs:
           npx -y grafbase introspect --dev > ../manufacturing.graphql
           popd
 
-      - uses: grafbase/schema-check-action@main
+      - uses: grafbase/schema-check-action@v1
         with:
-          grafbase_access_token: ${{ secrets.GRAFBASE_ACCESS_TOKEN }}
-          project_ref: tomhoule/schema-check-action-federated-graph-example@main
-          schema_path: ./retail.graphql
+          grafbase-access-token: ${{ secrets.GRAFBASE_ACCESS_TOKEN }}
+          project-ref: tomhoule/schema-check-action-federated-graph-example@main
+          schema-path: ./retail.graphql
 
-      - uses: grafbase/schema-check-action@main
+      - uses: grafbase/schema-check-action@v1
         with:
-          grafbase_access_token: ${{ secrets.GRAFBASE_ACCESS_TOKEN }}
-          project_ref: tomhoule/schema-check-action-federated-graph-example@main
-          schema_path: ./manufacturing.graphql
+          grafbase-access-token: ${{ secrets.GRAFBASE_ACCESS_TOKEN }}
+          project-ref: tomhoule/schema-check-action-federated-graph-example@main
+          schema-path: ./manufacturing.graphql
